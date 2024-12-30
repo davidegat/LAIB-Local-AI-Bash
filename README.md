@@ -20,9 +20,10 @@ To use this application, ensure you have:
 
 1. **Python 3.8+** installed on your system.
 2. **LMStudio** running locally to interact with the AI model (https://lmstudio.ai/).
+3. A LLM Model downloaded from LMStudio, better if trained on bash commands (see suggested below).
 
 ### Suggested LMStudio Configuration
-- Model: `bashcopilot-6b-preview`
+- LLM Model: `bashcopilot-6b-preview`
 - Context Length: `300`
 - Temperature: `0.45 - 0.5`
 - Response Length Limit: `50 tokens`
@@ -57,6 +58,7 @@ $ pip install tkinter requests tkterm
 - Download and install LMStudio.
 - Download and load the suggested model.
 - Configure LMStudio to run at `http://127.0.0.1:1234`.
+- Dowload the suggested model from LMStudio.
 
 ---
 
@@ -65,7 +67,7 @@ $ pip install tkinter requests tkterm
 ### Starting the Application
 Ensure LMStudio is running before starting the application. Then execute:
 ```bash
-$ python main.py
+$ python laib.py
 ```
 
 ### Interface Overview
@@ -116,7 +118,7 @@ When a blocked command is generated:
 
 ```plaintext
 LAIB-Local-AI-Bash/
-├── main.py                   # Main application file
+├── laib.py                   # Main application file
 ├── LICENSE                   # License file
 ├── README.md                 # Project documentation
 ├── whitelisted_commands.txt  # Whitelisted commands
