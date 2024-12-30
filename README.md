@@ -13,6 +13,8 @@
 - Integrated terminal for manual command entry.
 - Customizable menus and search: Access menu for customization, command list management, and searching through terminal output. Additionally, a context menu is available in terminal by right-clicking.
 
+![image](https://github.com/user-attachments/assets/e7458583-bca2-4b9b-92c0-fe498d94bbfc)
+
 ---
 
 ## Requirements
@@ -81,16 +83,24 @@ $ python laib.py
    - Use top-right menu to customize behavior, manage command lists, and search through terminal output.
    - Access a context menu in terminal by right-clicking.
 
+![image](https://github.com/user-attachments/assets/1f83ed95-0a13-4537-b0e6-1709f53379a9)
+
 ### Example Workflow
 1. Enter a query in the query box, e.g., `Show files in current dir`
 2. AI will generate a Bash command, which will be checked against whitelist/blacklist.
 3. If approved, command is executed automatically in terminal.
 4. If blocked, a review window allows you to edit or approve the command.
 
+![image](https://github.com/user-attachments/assets/35ed6b85-2220-40d2-a8e6-765fbc0a3855)
+![image](https://github.com/user-attachments/assets/cc5d7a18-c9bf-44d7-b0c5-8fcd5250c635)
+
+
 ### Command Management
 - **Whitelist**: Commands that bypass review and execute directly.
 - **Blacklist**: Commands requiring review before execution.
 - Access these lists from `Command Lists` menu.
+
+![image](https://github.com/user-attachments/assets/35948968-dd64-40bd-b354-e2a73f896439)
 
 ---
 
@@ -102,6 +112,8 @@ When a blocked command is generated:
 2. Edit the command or approve it for execution.
 3. Optionally, add command to whitelist for future use.
 
+![image](https://github.com/user-attachments/assets/97638461-9432-4c45-b805-ffc46718d8d8)
+
 ### Command Cache
 - Temporarily stores generated commands for faster reuse.
 - Use `Reset Cache` button to clear this cache.
@@ -111,6 +123,8 @@ When a blocked command is generated:
    - Run this software as root instead (not recommended).
 - Direct input in terminal bypasses safety checks; use with caution.
 - Supported Shells: Currently, only Bash is supported. Other interpreters or shells you will select by terminal menu may not function correctly with this application.
+
+![image](https://github.com/user-attachments/assets/63e7c2be-7992-4a89-903f-2bdd12e781f5)
 
 ---
 
