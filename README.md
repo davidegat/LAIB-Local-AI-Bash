@@ -11,7 +11,7 @@
 - Manage whitelisted (allowed) and blacklisted (blocked) commands.
 - Infinite loops and common 'bad' commands protection.
 - Integrated terminal for manual command entry.
-- Customizable menus and search: Access menu for customization, command list management, and searching through terminal output. Additionally, a context menu is available in terminal by right-clicking.
+- Other menus and search: Access menu for customization, command list management, and searching through terminal output. Additionally, a context menu is available in terminal by right-clicking.
 
 ![image](https://github.com/user-attachments/assets/e7458583-bca2-4b9b-92c0-fe498d94bbfc)
 
