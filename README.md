@@ -121,8 +121,9 @@ When a blocked command is generated:
    - Run this software as root instead (not recommended).
 - Direct input in terminal bypasses safety checks; use with caution.
 - Supported Shells: Currently, only Bash is supported. Other interpreters or shells you will select by terminal menu may not function correctly with this application.
-
+- Infinite loops are not supported.
 ![image](https://github.com/user-attachments/assets/63e7c2be-7992-4a89-903f-2bdd12e781f5)
+![image](https://github.com/user-attachments/assets/3cbd3a13-11a3-4e78-b91c-123064a4383e)
 
 ---
 
