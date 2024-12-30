@@ -1,1 +1,0 @@
-# LAIB-Local-AI-Bash
