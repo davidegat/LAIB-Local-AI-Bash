@@ -13,7 +13,6 @@
 - Integrated terminal for manual command entry.
 - Other menus and search: Access menu for customization, command list management, and searching through terminal output. Additionally, a context menu is available in terminal by right-clicking.
 
-![image](https://github.com/user-attachments/assets/f0251779-786a-44cb-8a52-3f995dfff568)
 
 ---
 
@@ -84,6 +83,7 @@ $ python laib.py
    - Access a context menu in terminal by right-clicking.
 
 ![image](https://github.com/user-attachments/assets/65d2d6c7-31a5-4e8b-b910-22f74beaab1c)
+![image](https://github.com/user-attachments/assets/f0251779-786a-44cb-8a52-3f995dfff568)
 
 ### Example Workflow
 1. Enter a query in the query box, e.g., `Show files in current dir`
