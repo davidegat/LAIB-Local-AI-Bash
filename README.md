@@ -83,8 +83,6 @@ $ python laib.py
    - Use top-right menu to customize behavior, manage command lists, and search through terminal output.
    - Access a context menu in terminal by right-clicking.
 
-![image](https://github.com/user-attachments/assets/1f83ed95-0a13-4537-b0e6-1709f53379a9)
-
 ### Example Workflow
 1. Enter a query in the query box, e.g., `Show files in current dir`
 2. AI will generate a Bash command, which will be checked against whitelist/blacklist.
