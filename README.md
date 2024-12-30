@@ -90,7 +90,7 @@ $ python laib.py
 4. If blocked, a review window allows you to edit or approve the command.
 
 ![image](https://github.com/user-attachments/assets/35ed6b85-2220-40d2-a8e6-765fbc0a3855)
-![image](https://github.com/user-attachments/assets/cc5d7a18-c9bf-44d7-b0c5-8fcd5250c635)
+![image](https://github.com/user-attachments/assets/81f21432-f33b-40fd-a357-6e037195a493)
 
 
 ### Command Management
