@@ -84,6 +84,7 @@ $ python laib.py
    - Access a context menu in terminal by right-clicking.
 
 ![image](https://github.com/user-attachments/assets/65d2d6c7-31a5-4e8b-b910-22f74beaab1c)
+
 ![image](https://github.com/user-attachments/assets/f0251779-786a-44cb-8a52-3f995dfff568)
 
 ### Example Workflow
@@ -93,6 +94,7 @@ $ python laib.py
 4. If blocked, a review window allows you to edit or approve the command.
 
 ![image](https://github.com/user-attachments/assets/35ed6b85-2220-40d2-a8e6-765fbc0a3855)
+
 ![image](https://github.com/user-attachments/assets/81f21432-f33b-40fd-a357-6e037195a493)
 
 
@@ -125,7 +127,9 @@ When a blocked command is generated:
 - Direct input in terminal bypasses safety checks; use with caution.
 - Supported Shells: Currently, only Bash is supported. Other interpreters or shells you will select by terminal menu may not function correctly with this application.
 - Infinite loops are not supported, so blocked before being executed.
+
 ![image](https://github.com/user-attachments/assets/63e7c2be-7992-4a89-903f-2bdd12e781f5)
+
 ![image](https://github.com/user-attachments/assets/3cbd3a13-11a3-4e78-b91c-123064a4383e)
 
 ---
