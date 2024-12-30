@@ -49,7 +49,7 @@ $ source venv/bin/activate
 ```
 
 3. **Install Required Libraries**
-Manually install required libraries using the following command:
+using the following command:
 ```bash
 $ pip install tkinter requests tkterm
 ```
