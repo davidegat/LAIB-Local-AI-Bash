@@ -117,7 +117,7 @@ When a blocked command is generated:
 ```plaintext
 LAIB-Local-AI-Bash/
 ├── main.py                   # Main application file
-├── LICENSE.md                # License file
+├── LICENSE                   # License file
 ├── README.md                 # Project documentation
 ├── whitelisted_commands.txt  # Whitelisted commands
 └── blocked_commands.txt      # Blacklisted commands
