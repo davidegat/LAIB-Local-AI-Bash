@@ -93,8 +93,6 @@ $ python laib.py
    - Use top-right menu to and search through terminal output.
    - Access context menu in terminal by right-clicking.
 
-![image](https://github.com/user-attachments/assets/65d2d6c7-31a5-4e8b-b910-22f74beaab1c)
-
 ![image](https://github.com/user-attachments/assets/f0251779-786a-44cb-8a52-3f995dfff568)
 
 ### Example Workflow
