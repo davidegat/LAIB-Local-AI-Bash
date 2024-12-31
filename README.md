@@ -28,7 +28,7 @@ To use this application, ensure you have:
 
 ### Suggested LMStudio Configuration
 - LLM Model: `bashcopilot-6b-preview`*
-   -  This model is 'bash' oriented: it mostly generate the right command, but sometimes, on higher values, it will try to build scripts, or long oneliners.
+   -  This model is 'bash' oriented: it mostly generates the right command, but sometimes, on higher values, it will try to build scripts, or long oneliners.
    -  Other general bigger models, like Llama, may work better in understanding the exact command, and less better in bash scripting.
    -  Avoiding 'uncensored' models may prevent bad commands to be generated.
 
