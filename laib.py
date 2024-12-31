@@ -11,23 +11,28 @@ import json
 # Nome del file di configurazione
 CONFIG_FILE = "config.json"
 
+
 def load_config():
     """Carica la configurazione da un file."""
     if os.path.exists(CONFIG_FILE):
         try:
-            with open(CONFIG_FILE, 'r') as file:
+            with open(CONFIG_FILE, "r") as file:
                 return json.load(file)
         except json.JSONDecodeError:
-            messagebox.showerror("Errore", "Errore nel leggere il file di configurazione.")
+            messagebox.showerror(
+                "Errore", "Errore nel leggere il file di configurazione."
+            )
     return {}
+
 
 def save_config(config):
     """Salva la configurazione in un file."""
     try:
-        with open(CONFIG_FILE, 'w') as file:
+        with open(CONFIG_FILE, "w") as file:
             json.dump(config, file, indent=4)
     except Exception as e:
         messagebox.showerror("Errore", f"Errore nel salvare la configurazione: {e}")
+
 
 def configure_endpoint():
     """Apre una finestra di dialogo per configurare l'endpoint."""
@@ -35,13 +40,18 @@ def configure_endpoint():
     current_endpoint = current_config.get("lmstudio_endpoint", "")
 
     # Finestra di dialogo per inserire il nuovo endpoint
-    new_endpoint = simpledialog.askstring("Configura Endpoint", "Inserisci l'endpoint di LMStudio:", initialvalue=current_endpoint)
+    new_endpoint = simpledialog.askstring(
+        "Configura Endpoint",
+        "Inserisci l'endpoint di LMStudio:",
+        initialvalue=current_endpoint,
+    )
 
     if new_endpoint:
         current_config["lmstudio_endpoint"] = new_endpoint
         save_config(current_config)
         messagebox.showinfo("Successo", "Endpoint configurato con successo!")
-        
+
+
 def ask_LLM(query):
 
     current_config = load_config()
@@ -49,7 +59,7 @@ def ask_LLM(query):
 
     if not endpoint:
         return "Error: LMStudio endpoint not configured."
-            
+
     system_prompt = (
         "Context is a real bash shell.\n"
         "Home folder is ~\n"
@@ -67,9 +77,7 @@ def ask_LLM(query):
     headers = {"Content-Type": "application/json"}
 
     try:
-        response = requests.post(
-            endpoint, headers=headers, json=data
-        )
+        response = requests.post(endpoint, headers=headers, json=data)
         response.raise_for_status()
         result = response.json()
         return result["choices"][0]["message"]["content"]
@@ -201,29 +209,23 @@ class AIEnhancedTerminalApp(tk.Tk):
         self.config(menu=self.menu_bar)
 
         help_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
-        self.menu_bar.add_cascade(label="Help", menu=help_menu)
-        help_menu.add_command(label="User Guide", command=self.show_help)
-        help_menu.add_command(label="About", command=self.show_about)
-
-        command_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
-        self.menu_bar.add_cascade(label="Command Lists", menu=command_menu)
-        command_menu.add_command(
+        settings_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
+        self.menu_bar.add_cascade(label="Settings", menu=settings_menu)
+        settings_menu.add_command(
             label="Edit Whitelist",
             command=lambda: self.open_command_list_editor("whitelisted"),
         )
-        command_menu.add_command(
+        settings_menu.add_command(
             label="Edit Blacklist",
             command=lambda: self.open_command_list_editor("blocked"),
         )
-
-        settings_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
-        self.menu_bar.add_cascade(label="Settings", menu=settings_menu)
         settings_menu.add_command(
             label="Configure LMStudio Endpoint",
             command=configure_endpoint,
         )
-
-
+        self.menu_bar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="User Guide", command=self.show_help)
+        help_menu.add_command(label="About", command=self.show_about)
         self.terminal_frame = tk.Frame(self, bg="#1E1E1E")  # Sfondo uniforme
         self.terminal_frame.grid(row=0, column=0, sticky="nsew")
 
