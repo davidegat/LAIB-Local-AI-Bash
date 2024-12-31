@@ -59,7 +59,7 @@ using the following command:
 ```bash
 $ pip install tkinter requests tkterm
 ```
-If not included in your installation, you may also need: `threading`, `os`, `requests`, `re`, `json`, `queue`
+If not included in your installation, you may also need: `threading`, `os`, `re`, `json`, `queue`
 
 4. **Install LMStudio**
 - Download and install LMStudio.
