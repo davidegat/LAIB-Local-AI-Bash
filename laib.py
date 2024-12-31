@@ -1,15 +1,55 @@
 import tkinter as tk
-from tkinter import scrolledtext, messagebox, Toplevel
+from tkinter import scrolledtext, messagebox, Toplevel, simpledialog
 import threading
 from tkterm import Terminal
 import os
 import requests
 from datetime import datetime
 import re
+import json
 
+# Nome del file di configurazione
+CONFIG_FILE = "config.json"
 
+def load_config():
+    """Carica la configurazione da un file."""
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE, 'r') as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            messagebox.showerror("Errore", "Errore nel leggere il file di configurazione.")
+    return {}
+
+def save_config(config):
+    """Salva la configurazione in un file."""
+    try:
+        with open(CONFIG_FILE, 'w') as file:
+            json.dump(config, file, indent=4)
+    except Exception as e:
+        messagebox.showerror("Errore", f"Errore nel salvare la configurazione: {e}")
+
+def configure_endpoint():
+    """Apre una finestra di dialogo per configurare l'endpoint."""
+    current_config = load_config()
+    current_endpoint = current_config.get("lmstudio_endpoint", "")
+
+    # Finestra di dialogo per inserire il nuovo endpoint
+    new_endpoint = simpledialog.askstring("Configura Endpoint", "Inserisci l'endpoint di LMStudio:", initialvalue=current_endpoint)
+
+    if new_endpoint:
+        current_config["lmstudio_endpoint"] = new_endpoint
+        save_config(current_config)
+        messagebox.showinfo("Successo", "Endpoint configurato con successo!")
+        
 def ask_LLM(query):
-    current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    current_config = load_config()
+    endpoint = current_config.get("lmstudio_endpoint")
+
+    if not endpoint:
+        return "Error: LMStudio endpoint not configured."
+            
     system_prompt = (
         "Context is a real bash shell.\n"
         "Home folder is ~\n"
@@ -28,7 +68,7 @@ def ask_LLM(query):
 
     try:
         response = requests.post(
-            "http://127.0.0.1:1234/v1/chat/completions", headers=headers, json=data
+            endpoint, headers=headers, json=data
         )
         response.raise_for_status()
         result = response.json()
@@ -176,6 +216,14 @@ class AIEnhancedTerminalApp(tk.Tk):
             command=lambda: self.open_command_list_editor("blocked"),
         )
 
+        settings_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
+        self.menu_bar.add_cascade(label="Settings", menu=settings_menu)
+        settings_menu.add_command(
+            label="Configure LMStudio Endpoint",
+            command=configure_endpoint,
+        )
+
+
         self.terminal_frame = tk.Frame(self, bg="#1E1E1E")  # Sfondo uniforme
         self.terminal_frame.grid(row=0, column=0, sticky="nsew")
 
@@ -249,6 +297,7 @@ class AIEnhancedTerminalApp(tk.Tk):
                 first_line.replace("> /dev/null 2>&1", "")
                 .replace("> /dev/null", "")
                 .replace("< /dev/null", "")
+                .replace(">/dev/null 2>&1", "")
             )
             # Check for infinite loop patterns with regex
             loop_patterns = [
