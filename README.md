@@ -27,7 +27,7 @@ To use this application, ensure you have:
 3. A LLM Model downloaded from LMStudio, better if trained on bash commands (see suggested below).
 
 ### Suggested LMStudio Configuration
-- LLM Model: `bashcopilot-6b-preview`
+- LLM Model: `bashcopilot-6b-preview` (other general bigger models, like Llama, may work even better!)
 - Context Length: `200-400`
 - Temperature: `0.45 - 0.6`
 - Response Length Limit: `50-250 tokens`
@@ -36,7 +36,7 @@ To use this application, ensure you have:
 - Top-P Sampling: `0.95`
 - Minimum P Sampling: `0.05`
 
-Different models may require different settings.
+These settings have been tested with good results on other models. As a general suggestion: keep values low.
 
 ---
 
