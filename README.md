@@ -124,6 +124,7 @@ When a blocked command is generated:
 - Use `Reset Cache` button to clear this cache.
 
 ### Safety Notes
+- **Use at own risk**: most dangerous commands are blocked, but **no one can guarantee that all AI generated commands will do no harm**. Do not use on important or production contexts! 
 - Commands starting with `sudo` are not supported by tkterm library and are blocked for safety.
    - Run this software as root instead (not recommended).
 - Direct input in terminal bypasses safety checks; use with caution.
@@ -142,10 +143,9 @@ When a blocked command is generated:
 1. **AI not responding**: Ensure LMStudio is running and accessible at `http://127.0.0.1:1234`, check if model is loaded and its settings.
 2. **Command not executing**: Check if command is in blacklist.
 3. **Sudo commands not allowed**: These are generally blocked, run software as root if needed.
-4. **API Console**: Available under debug menu.
+4. **API Console**: Available under `debug` menu to monitor LMStudio endpoint.
 
 ![image](https://github.com/user-attachments/assets/1f4ab2e1-b2c1-4fc7-a92c-0b0c67a724ca)
-
 
 ---
 
