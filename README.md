@@ -13,8 +13,6 @@
 - Integrated terminal for manual command entry.
 - Other menus and search: Access menu for customization, command list management, and searching through terminal output. Additionally, a context menu is available in terminal by right-clicking.
 
-![image](https://github.com/user-attachments/assets/35ed6b85-2220-40d2-a8e6-765fbc0a3855)
-
 ![image](https://github.com/user-attachments/assets/a1a7cb1f-fce9-4b2f-a818-5774dbfee032)
 
 ---
