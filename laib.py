@@ -6,50 +6,73 @@ import os
 import requests
 import re
 import json
+import queue
 
-CONFIG_FILE = "config.json"
+CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
 
 
 def load_config():
-    """Carica la configurazione da un file."""
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r") as file:
                 return json.load(file)
         except json.JSONDecodeError:
-            messagebox.showerror(
-                "Errore", "Errore nel leggere il file di configurazione."
-            )
+            messagebox.showerror("Errore", "Errore loading config.")
     return {}
 
 
 def save_config(config):
-    """Salva la configurazione in un file."""
     try:
         with open(CONFIG_FILE, "w") as file:
             json.dump(config, file, indent=4)
     except Exception as e:
-        messagebox.showerror("Errore", f"Errore nel salvare la configurazione: {e}")
+        messagebox.showerror("Error", f"Errore saving configuration: {e}")
 
 
 def configure_endpoint():
-    """Apre una finestra di dialogo per configurare l'endpoint."""
     current_config = load_config()
     current_endpoint = current_config.get("lmstudio_endpoint", "")
 
     new_endpoint = simpledialog.askstring(
-        "Configura Endpoint",
-        "Inserisci l'endpoint di LMStudio:",
+        "LMStudio Endpoint",
+        "Enter Endpoint here:",
         initialvalue=current_endpoint,
     )
 
     if new_endpoint:
         current_config["lmstudio_endpoint"] = new_endpoint
         save_config(current_config)
-        messagebox.showinfo("Successo", "Endpoint configurato con successo!")
+        messagebox.showinfo("Success", "Endpoint edited!")
 
 
-def ask_LLM(query):
+class HTTPDebugWindow(Toplevel):
+    def __init__(self, parent, http_queue):
+        super().__init__(parent)
+        current_config = load_config()
+        endpoint = current_config.get("lmstudio_endpoint")
+        self.title(f"LMStudio Endpoint: {endpoint}")
+        self.geometry("700x400")
+        self.configure(bg="#2E2E2E")
+
+        self.text_area = scrolledtext.ScrolledText(
+            self, wrap=tk.WORD, bg="#3C3C3C", fg="white"
+        )
+        self.text_area.pack(expand=True, fill="both", padx=10, pady=10)
+        self.text_area.configure(state="disabled")
+
+        self.http_queue = http_queue
+        self.update_log()
+
+    def update_log(self):
+        while not self.http_queue.empty():
+            log_entry = self.http_queue.get()
+            self.text_area.configure(state="normal")
+            self.text_area.insert(tk.END, f"{log_entry}\n")
+            self.text_area.configure(state="disabled")
+        self.after(100, self.update_log)
+
+
+def ask_LLM(query, http_queue):
 
     current_config = load_config()
     endpoint = current_config.get("lmstudio_endpoint")
@@ -58,10 +81,10 @@ def ask_LLM(query):
         return "Error: LMStudio endpoint not configured."
 
     system_prompt = (
-        "Context is a real bash shell.\n"
+        "Context is a real bash linux shell.\n"
         "Home folder is ~\n"
         "list files with ls\n"
-        "If asked command, raw single simplest command possible must be generated, will be executed in a real shell, "
+        "If asked command, raw single simplest linux command possible must be generated, will be executed in a real shell, "
         "written plaintext, no 'if/then/else/ constructions, only simplest commands, no escape chars, no quotes, no preambles, never to be used: '> /dev/null' or '/dev/null 2>&1', no loops.\n"
     )
 
@@ -74,17 +97,29 @@ def ask_LLM(query):
     headers = {"Content-Type": "application/json"}
 
     try:
-        response = requests.post(endpoint, headers=headers, json=data)
+        # Registra la richiesta
+        http_queue.put(f"Request: {json.dumps(data, indent=2)}")
+
+        # Esegui la richiesta con timeout
+        response = requests.post(endpoint, headers=headers, json=data, timeout=10)
         response.raise_for_status()
         result = response.json()
+
+        # Registra la risposta
+        http_queue.put(f"Response: {json.dumps(result, indent=2)}")
+
         return result["choices"][0]["message"]["content"]
+    except requests.exceptions.Timeout:
+        http_queue.put("Error: Request timed out.")
+        return "Error: Request timed out."
     except Exception as e:
+        http_queue.put(f"Error: {e}")
         return f"Error: {e}"
 
 
 def load_command_list(filename):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    filepath = os.path.join(script_dir, filename)
+    filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
+
     try:
         with open(filepath, "r") as file:
             return [line.strip() for line in file if line.strip()]
@@ -201,6 +236,7 @@ class AIEnhancedTerminalApp(tk.Tk):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=0)
+        self.http_queue = queue.Queue()
 
         self.menu_bar = tk.Menu(self)
         self.config(menu=self.menu_bar)
@@ -217,7 +253,7 @@ class AIEnhancedTerminalApp(tk.Tk):
             command=lambda: self.open_command_list_editor("blocked"),
         )
         settings_menu.add_command(
-            label="Configure LMStudio Endpoint",
+            label="Edit LMStudio Endpoint",
             command=configure_endpoint,
         )
         self.menu_bar.add_cascade(label="Help", menu=help_menu)
@@ -225,7 +261,9 @@ class AIEnhancedTerminalApp(tk.Tk):
         help_menu.add_command(label="About", command=self.show_about)
         self.terminal_frame = tk.Frame(self, bg="#1E1E1E")
         self.terminal_frame.grid(row=0, column=0, sticky="nsew")
-
+        debug_menu = tk.Menu(self.menu_bar, tearoff=0, bg="#1E1E1E", fg="white")
+        self.menu_bar.add_cascade(label="Debug", menu=debug_menu)
+        debug_menu.add_command(label="API Debug", command=self.open_http_debug_window)
         self.terminal = Terminal(self.terminal_frame)
         self.terminal.pack(expand=True, fill="both")
 
@@ -258,6 +296,9 @@ class AIEnhancedTerminalApp(tk.Tk):
         )
         self.reset_cache_button.grid(row=1, column=1, padx=5, pady=5)
 
+    def open_http_debug_window(self):
+        HTTPDebugWindow(self, self.http_queue)
+
     def open_command_list_editor(self, list_type):
         CommandListEditor(self, list_type)
 
@@ -273,7 +314,7 @@ class AIEnhancedTerminalApp(tk.Tk):
         if query in self.cache:
             ai_response = self.cache[query]
         else:
-            ai_response = ask_LLM(query).strip()
+            ai_response = ask_LLM(query, self.http_queue).strip()
             self.cache[query] = ai_response
 
         if ai_response:
@@ -324,6 +365,10 @@ class AIEnhancedTerminalApp(tk.Tk):
                 self.run_terminal_command(first_line)
 
         self.query_entry.delete(0, tk.END)
+
+    def process_query(self, query):
+        response = ask_LLM(query, self.http_queue)
+        messagebox.showinfo("AI Response", response)
 
     def reset_cache(self):
         """Clear the command cache."""
