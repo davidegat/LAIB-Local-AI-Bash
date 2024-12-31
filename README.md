@@ -1,7 +1,7 @@
 # LAIB# Local AI Bash
 
 ## Overview
-**LAIB# Local AI Bash** is an interactive terminal application that integrates a local AI model for natural language-based command generation. It includes features like whitelisting, blacklisting, and manual command review to ensure safety and usability.
+**LAIB# Local AI Bash** is an interactive terminal application that integrates a local AI model for natural language-based command generation. It includes features like whitelisting, blacklisting, and manual command review to ensure safety and usability. Currently, LAIB# has been tested only on Linux, but may work on other operating systems too, with small code changes.
 
 ### Key Features
 - Generate commands using natural language queries.
