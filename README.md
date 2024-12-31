@@ -27,7 +27,7 @@ To use this application, ensure you have:
 3. A LLM Model downloaded from LMStudio (see suggestions below).
 
 ### Suggested LMStudio Configuration
-- LLM Model: `bashcopilot-6b-preview`*
+- LLM Model: `bashcopilot-6b-preview`
    -  This model is 'bash' oriented: it mostly generates the right command, but sometimes, on higher values, it will try to build scripts, or long oneliners.
    -  Other general bigger models, like Llama, may work better in understanding the exact command, and less better in bash scripting.
    -  Avoiding 'uncensored' models may prevent bad commands to be generated.
@@ -68,7 +68,6 @@ If not included in your installation, you may also need: `threading`, `os`, `re`
 - Download and install LMStudio.
 - Download and load the suggested model.
 - Configure LMStudio to run at `http://127.0.0.1:1234`.
-- Dowload the suggested model from LMStudio.
 
 You can also set your favourite LMStudio Endpoint via `settings` menu, to access a custom local or remote LMStudio API.
 
