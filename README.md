@@ -24,7 +24,7 @@ To use this application, ensure you have:
 
 1. **Python 3.8+** installed on your system.
 2. **LMStudio** running locally to interact with the AI model (https://lmstudio.ai/).
-3. A LLM Model downloaded from LMStudio, better if trained on bash commands (see suggested below).
+3. A LLM Model downloaded from LMStudio (see suggestions below).
 
 ### Suggested LMStudio Configuration
 - LLM Model: `bashcopilot-6b-preview`*
