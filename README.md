@@ -28,7 +28,7 @@ To use this application, ensure you have:
 - LLM Model: `bashcopilot-6b-preview`
 - Context Length: `300`
 - Temperature: `0.45 - 0.5`
-- Response Length Limit: `50 tokens`
+- Response Length Limit: `50-150 tokens`
 - Top-K Sampling: `40`
 - Repeat Penalty: `1.1`
 - Top-P Sampling: `0.95`
