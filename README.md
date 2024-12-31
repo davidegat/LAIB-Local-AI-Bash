@@ -27,16 +27,19 @@ To use this application, ensure you have:
 3. A LLM Model downloaded from LMStudio, better if trained on bash commands (see suggested below).
 
 ### Suggested LMStudio Configuration
-- LLM Model: `bashcopilot-6b-preview` (other general bigger models, like Llama, may work even better!)
-- Context Length: `200-400`
-- Temperature: `0.45 - 0.6`
-- Response Length Limit: `50-250 tokens`
-- Top-K Sampling: `40`
-- Repeat Penalty: `1.1`
-- Top-P Sampling: `0.95`
-- Minimum P Sampling: `0.05`
+- LLM Model: `bashcopilot-6b-preview`*
+   -  This model is 'bash' oriented: it mostly generate the right command, but sometimes, on higher values, it will try to build scripts, or long oneliners.
+   -  Other general bigger models, like Llama, may work better in understanding the exact command, and less better in bash scripting.
+   -  Avoiding 'uncensored' models may prevent bad commands to be generated.
 
-These settings have been tested with good results on other models. As a general suggestion: keep values low.
+- These settings have been tested with good results on other models. As a general suggestion: keep values low, especially on bigger models.
+   - Context Length: `200-400`
+   - Temperature: `0.45 - 0.6`
+   - Response Length Limit: `50-250 tokens`
+   - Top-K Sampling: `40`
+   - Repeat Penalty: `1.1`
+   - Top-P Sampling: `0.95`
+   - Minimum P Sampling: `0.05`
 
 ---
 
