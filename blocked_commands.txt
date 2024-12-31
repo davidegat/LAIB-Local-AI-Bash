@@ -182,6 +182,7 @@ pkgin
 slackpkg
 swupd
 opkg
+date
 ipkg
 apk
 xbps
