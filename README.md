@@ -134,20 +134,6 @@ When a blocked command is generated:
 
 ---
 
-## File Structure
-
-```plaintext
-LAIB-Local-AI-Bash/
-├── laib.py                   # Main application file
-├── LICENSE                   # License file
-├── README.md                 # Project documentation
-├── whitelisted_commands.txt  # Whitelisted commands
-├── blocked_commands.txt      # Blacklisted commands
-└── config.json               # Config file
-```
-
----
-
 ## Troubleshooting
 
 ### Common Issues
