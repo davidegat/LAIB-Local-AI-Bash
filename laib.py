@@ -4,11 +4,9 @@ import threading
 from tkterm import Terminal
 import os
 import requests
-from datetime import datetime
 import re
 import json
 
-# Nome del file di configurazione
 CONFIG_FILE = "config.json"
 
 
@@ -39,7 +37,6 @@ def configure_endpoint():
     current_config = load_config()
     current_endpoint = current_config.get("lmstudio_endpoint", "")
 
-    # Finestra di dialogo per inserire il nuovo endpoint
     new_endpoint = simpledialog.askstring(
         "Configura Endpoint",
         "Inserisci l'endpoint di LMStudio:",
@@ -200,7 +197,7 @@ class AIEnhancedTerminalApp(tk.Tk):
         self.configure(bg="#2E2E2E")
         self.command_history = []
         self.history_index = -1
-        self.cache = {}  # Inizializzazione della cache qui
+        self.cache = {}
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=0)
@@ -226,13 +223,13 @@ class AIEnhancedTerminalApp(tk.Tk):
         self.menu_bar.add_cascade(label="Help", menu=help_menu)
         help_menu.add_command(label="User Guide", command=self.show_help)
         help_menu.add_command(label="About", command=self.show_about)
-        self.terminal_frame = tk.Frame(self, bg="#1E1E1E")  # Sfondo uniforme
+        self.terminal_frame = tk.Frame(self, bg="#1E1E1E")
         self.terminal_frame.grid(row=0, column=0, sticky="nsew")
 
         self.terminal = Terminal(self.terminal_frame)
         self.terminal.pack(expand=True, fill="both")
 
-        self.query_frame = tk.Frame(self, bg="#1E1E1E")  # Sfondo uniforme
+        self.query_frame = tk.Frame(self, bg="#1E1E1E")
         self.query_frame.grid(row=1, column=0, sticky="ew")
         self.query_frame.columnconfigure(0, weight=1)
         self.query_frame.columnconfigure(1, weight=0)
@@ -273,12 +270,11 @@ class AIEnhancedTerminalApp(tk.Tk):
             self.command_history.append(query)
         self.history_index = len(self.command_history)
 
-        # Controllo nella cache
         if query in self.cache:
             ai_response = self.cache[query]
         else:
             ai_response = ask_LLM(query).strip()
-            self.cache[query] = ai_response  # Salva il risultato nella cache
+            self.cache[query] = ai_response
 
         if ai_response:
             first_line = ai_response.split("\n")[0]
