@@ -142,8 +142,8 @@ LAIB-Local-AI-Bash/
 ├── LICENSE                   # License file
 ├── README.md                 # Project documentation
 ├── whitelisted_commands.txt  # Whitelisted commands
-└── blocked_commands.txt      # Blacklisted commands
-
+├── blocked_commands.txt      # Blacklisted commands
+└── config.json               # Config file
 ```
 
 ---
