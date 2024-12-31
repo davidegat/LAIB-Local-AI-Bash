@@ -32,7 +32,7 @@ To use this application, ensure you have:
    -  Other general bigger models, like Llama, may work better in understanding the exact command, and less better in bash scripting.
    -  Avoiding 'uncensored' models may prevent bad commands to be generated.
 
-- These settings have been tested with good results on other models. As a general suggestion: keep values low, especially on bigger models.
+- These settings have been tested with good results on other models. As a general suggestion: keep values low, especially on bigger models:
    - Context Length: `200-400`
    - Temperature: `0.45 - 0.6`
    - Response Length Limit: `50-250 tokens`
@@ -83,7 +83,7 @@ $ python laib.py
 
 ### Interface Overview
 1. **Terminal Frame**: Interactive terminal for direct Bash commands and output display.
-2. **Query Box**: Input natural language queries to generate Bash commands.
+2. **Query Box**: Input natural language queries to generate commands.
 3. **Menu Bar**:
    - **Settings**: Edit whitelist, blacklist, LMStudio Endpoint.
    - **Help**: Access user guide and about section.
@@ -99,7 +99,7 @@ $ python laib.py
 
 ### Example Workflow
 1. Enter a query in the query box, e.g., `Show files in current dir`
-2. AI will generate a Bash command, which will be checked against whitelist/blacklist.
+2. AI will generate a command, which will be checked against whitelist/blacklist.
 3. If approved, command is executed automatically in terminal.
 4. If blocked, a review window allows you to edit or approve the command.
 5. In some cases, command blocks are hardcoded (loops, sudo).
