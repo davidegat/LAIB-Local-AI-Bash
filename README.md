@@ -4,7 +4,7 @@
 **LAIB# Local AI Bash** is an interactive terminal application that integrates a local AI model for natural language-based command generation. It includes features like whitelisting, blacklisting, and manual command review to ensure safety and usability.
 
 ### Key Features
-- Generate Bash commands using natural language queries.
+- Generate commands using natural language queries.
 - Uses local LLM Models (LMStudio https://lmstudio.ai/ required).
 - Manage whitelisted (allowed) and blacklisted (blocked) commands.
 - Review and edit blocked AI-generated commands before execution.
