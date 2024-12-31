@@ -67,6 +67,8 @@ If not included in your installation, you may also need: `threading`, `os`, `re`
 - Configure LMStudio to run at `http://127.0.0.1:1234`.
 - Dowload the suggested model from LMStudio.
 
+You can also set your favourite LMStudio Endpoint via `settings` menu, to access a custom local or remote LMStudio API.
+
 ---
 
 ## Usage
