@@ -140,7 +140,7 @@ $ python laib.py
 ## Troubleshooting
 
 ### Common Issues
-1. **AI not responding**: Ensure LMStudio is running and accessible at `http://127.0.0.1:1234`, check if model is loaded and its settings.
+1. **AI not responding**: Ensure LMStudio is running and accessible at `http://127.0.0.1:1234`, check if model is loaded and its settings, or check LMStudio endpoint under `settings`.
 2. **Command not executing**: Check if command is in blacklist.
 3. **Sudo commands not allowed**: These are generally blocked, run software as root if needed.
 4. **API Console**: Available under `debug` menu to monitor LMStudio endpoint.
